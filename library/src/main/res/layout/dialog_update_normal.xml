@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/dialog_update_textview_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40px"
+        android:gravity="center"
+        android:text="@string/the_new_version_is_detected"
+        android:textColor="@color/black"
+        android:textSize="36px" />
+
+    <TextView
+        android:id="@+id/dialog_update_textview_title_note"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="--"
+        android:textColor="@color/black"
+        android:textSize="32px" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line_cf" />
+
+    <LinearLayout
+        android:id="@+id/control_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/dialog_update_textview_left"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/not_update"
+            android:textColor="@color/gray"
+            android:textSize="36px"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/dialog_update_textview_right"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/update_now"
+            android:textColor="@color/wide_main3"
+            android:textSize="36px" />
+    </LinearLayout>
+</LinearLayout>

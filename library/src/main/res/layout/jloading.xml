@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:id="@+id/jloading_layout"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:clickable="true"
+             android:background="#00000000"
+             android:gravity="center"
+>
+    <android.support.design.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            app:cardElevation="@dimen/base5dp"
+            app:cardCornerRadius="@dimen/base5dp"
+            android:layout_margin="@dimen/base5dp"
+            android:layout_height="wrap_content">
+
+
+        <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+
+                android:background="#80000000"
+                android:padding="@dimen/base10dp"
+                android:layout_height="wrap_content">
+
+            <android.support.v4.widget.ContentLoadingProgressBar
+                    android:id="@+id/jloading_pb"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="@dimen/base50dp"
+                    android:layout_height="@dimen/base50dp"
+                    android:layout_gravity="center"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/jloading_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/jloading_default_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/base13sp"/>
+        </android.support.v7.widget.LinearLayoutCompat>
+    </android.support.design.card.MaterialCardView>
+</FrameLayout>

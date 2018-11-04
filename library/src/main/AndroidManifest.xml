@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lxh.library">
+
+    <!-- 网络 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application>
+
+        <!-- 更新APK服务 -->
+        <service android:name=".update.UpdateAPKServiceLoad" />
+        <!-- 17 选择图片 -->
+        <activity
+            android:name=".modular.imageChoose.ImageChooseActivity"
+            android:screenOrientation="portrait" />
+        <!-- 18选择相册 -->
+        <activity
+            android:name=".modular.imageChoose.ImageBucketChooseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".widget.bigImage.BigImageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/bigImage" />
+    </application>
+
+</manifest>

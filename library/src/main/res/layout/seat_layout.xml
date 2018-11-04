@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/seatRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    android:visibility="gone">
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvSeatHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/base30dp"
+        android:text="@string/app_name"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/base13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/ivSeatIcon"
+        android:layout_width="@dimen/base110dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/base30dp"
+        android:src="@mipmap/seat"
+        app:layout_constraintBottom_toTopOf="@+id/tvSeatHint"
+        app:layout_constraintDimensionRatio="220:215"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvSeatBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/base30dp"
+        android:paddingStart="@dimen/base30dp"
+        android:paddingLeft="@dimen/base30dp"
+        android:paddingTop="@dimen/base10dp"
+        android:paddingEnd="@dimen/base30dp"
+        android:paddingRight="@dimen/base30dp"
+        android:paddingBottom="@dimen/base10dp"
+        android:text="@string/app_name"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/base15sp"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSeatHint" />
+
+
+</android.support.constraint.ConstraintLayout>

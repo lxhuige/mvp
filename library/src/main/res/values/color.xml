@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#46AAFF</color>
+    <color name="colorPrimaryDark">#646EFF</color>
+    <color name="colorAccent">#46AAFF</color>
+
+    <color name="white">#FFffff</color>
+    <color name="white_press">#e6e6e6</color>
+    <color name="transparent">#00000000</color>
+    <color name="main_bg">#F7F7F7</color>
+    <color name="text_black">#0a0909</color>
+    <color name="gray">#252323</color>
+    <color name="main_tab_text_normal_color">#999999</color>
+    <color name="wide_main3">#479aff</color>
+
+    <color name="line_cf">#CFCFCF</color>
+    <color name="tv_color9">#999999</color>
+    <color name="black">#302e2e</color>
+</resources>

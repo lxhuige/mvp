@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/header"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/icon_refresh"
+        android:layout_width="@dimen/base20dp"
+        android:layout_height="@dimen/base20dp"
+        android:layout_alignBottom="@+id/ptj_task_rv_header"
+        android:layout_alignTop="@+id/ptj_task_rv_header"
+        android:src="@mipmap/refresh_header" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="@dimen/base20dp"
+        android:layout_height="@dimen/base20dp"
+        android:layout_alignBottom="@+id/ptj_task_rv_header"
+        android:layout_alignLeft="@+id/icon_refresh"
+        android:layout_alignStart="@+id/icon_refresh"
+        android:layout_alignTop="@+id/ptj_task_rv_header"
+        android:indeterminate="false"
+        android:indeterminateDrawable="@drawable/refresh_progress_circle" />
+
+    <LinearLayout
+        android:id="@+id/ptj_task_rv_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/base10dp"
+        android:layout_marginStart="@dimen/base10dp"
+        android:layout_marginTop="@dimen/base10dp"
+        android:layout_toEndOf="@+id/icon_refresh"
+        android:layout_toRightOf="@+id/icon_refresh"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/ptj_task_rv_header_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:text="@string/ptjob_header_refresh"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/base12sp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/refresh_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:text="@string/ptjob_header_refresh"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/base12sp" />
+    </LinearLayout>
+</RelativeLayout>

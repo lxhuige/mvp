@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:textColor="@android:color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:visibility="gone"
+        android:background="@color/colorPrimary">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/back"
+            android:layout_width="?actionBarSize"
+            android:layout_height="match_parent"
+            android:padding="@dimen/base6dp"
+            app:srcCompat="@drawable/back" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:text="选择图片"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/base17sp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_sure"
+            android:layout_width="?actionBarSize"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:padding="@dimen/base10dp"
+            android:text="确定"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/base15sp" />
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/gridview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/finish_btn"
+        android:layout_below="@+id/title_bar"
+        android:layout_margin="@dimen/base8dp"
+        android:horizontalSpacing="@dimen/base8dp"
+        android:numColumns="3"
+        android:scrollbars="none"
+        android:verticalSpacing="@dimen/base8dp"/>
+
+</android.support.v7.widget.LinearLayoutCompat>

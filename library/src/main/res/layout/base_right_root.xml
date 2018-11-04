@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rightRoot"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
+    android:layout_centerVertical="true"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:paddingEnd="@dimen/base15dp"
+    android:paddingRight="@dimen/base15dp" />
