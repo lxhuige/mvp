@@ -18,6 +18,7 @@ import android.view.WindowManager
 import android.widget.FrameLayout
 import com.lxh.library.AppManager
 import com.lxh.library.R
+import com.lxh.library.widget.LToolbar
 import com.lxh.library.widget.SeatView
 import kotlinx.android.synthetic.main.activity_app.*
 import kotlinx.android.synthetic.main.base_header.*
@@ -31,14 +32,17 @@ abstract class AppActivity : AppCompatActivity(), View.OnClickListener, BaseView
 
     protected val seatView by lazy {
         val seat = SeatView()
-        if (seat.root == null) {
-            val view = viewStubSeat.inflate()
-            seat.root = view.findViewById(R.id.seatRoot)
-            seat.ivSeatIcon = view.findViewById(R.id.ivSeatIcon)
-            seat.tvSeatBtn = view.findViewById(R.id.tvSeatBtn)
-            seat.tvSeatHint = view.findViewById(R.id.tvSeatHint)
-        }
+        val view = viewStubSeat.inflate()
+        seat.root = view.findViewById(R.id.seatRoot)
+        seat.ivSeatIcon = view.findViewById(R.id.ivSeatIcon)
+        seat.tvSeatBtn = view.findViewById(R.id.tvSeatBtn)
+        seat.tvSeatHint = view.findViewById(R.id.tvSeatHint)
         return@lazy seat
+    }
+    protected val toolbar by lazy {
+        val lToolbar = baseHeader.inflate() as LToolbar
+        setSupportActionBar(lToolbar)
+        return@lazy lToolbar
     }
 
     abstract val contentView: Int
@@ -52,40 +56,14 @@ abstract class AppActivity : AppCompatActivity(), View.OnClickListener, BaseView
         initListener()
     }
 
-    fun initTitle(left: Boolean, title: String, right: String?) {
-        if (null == tvTitle)
-            base_header.inflate()
-        tvTitle.text = title
-        if (left) {
-            initTitle(title)
-        } else {
-            btnLeft.visibility = View.GONE
-        }
-        right?.let {
-            btnRight.visibility = View.VISIBLE
-            btnRight.text = it
-            btnRight.setOnClickListener(this)
-        }
-    }
-
-    fun setMenu(left: Drawable?, top: Drawable?,
-                right: Drawable?, bottom: Drawable?) {
-        btnRight.visibility = View.VISIBLE
-        btnRight.setCompoundDrawables(left, top, right, bottom)
-        btnRight.setOnClickListener(this)
-    }
 
     fun initTitle(resId: Int) {
         initTitle(getString(resId))
     }
 
     fun initTitle(title: String?) {
-        if (null == tvTitle)
-            base_header.inflate()
-        tvTitle.text = title
-        setStatusBarColor(R.drawable.shape_header_bg)
-        btnLeft.visibility = View.VISIBLE
-        btnLeft.setOnClickListener { finish() }
+        supportActionBar?.title = title
+        toolbar.setNavigationOnClickListener { finish() }
     }
 
     fun redirectTo(cls: Class<*>, close: Boolean) {
@@ -96,20 +74,8 @@ abstract class AppActivity : AppCompatActivity(), View.OnClickListener, BaseView
         }
     }
 
-    fun getHeadRoot(): View? {
-        return headRoot
-    }
-
     fun getFrameLayoutRoot(): FrameLayout? {
         return baseRoot
-    }
-
-    fun getHeadTitle(): AppCompatTextView? {
-        return tvTitle
-    }
-
-    fun getHeadBtnLeft(): AppCompatImageView? {
-        return btnLeft
     }
 
     /**
@@ -148,7 +114,8 @@ abstract class AppActivity : AppCompatActivity(), View.OnClickListener, BaseView
             localLayoutParams.flags = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or localLayoutParams.flags
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//android6.0以后可以对状态栏文字颜色和图标进行修改
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
     }
 
@@ -182,13 +149,13 @@ abstract class AppActivity : AppCompatActivity(), View.OnClickListener, BaseView
     private val handler by lazy {
         return@lazy @SuppressLint("HandlerLeak")
         object : Handler() {
-              override fun handleMessage(msg: Message?) {
-                  when (msg?.what) {
-                      1 -> loading.visibility = View.VISIBLE
-                      2 -> loading.visibility = View.GONE
-                  }
-              }
-          }
+            override fun handleMessage(msg: Message?) {
+                when (msg?.what) {
+                    1 -> loading.visibility = View.VISIBLE
+                    2 -> loading.visibility = View.GONE
+                }
+            }
+        }
     }
 
     override fun loadingDismiss() {

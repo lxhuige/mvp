@@ -6,13 +6,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
-    <com.lxh.library.widget.LToolbar
+    <android.support.v7.widget.AppCompatButton
             android:layout_width="match_parent"
-            android:id="@+id/toobar"
-            android:background="?attr/colorPrimary"
-            app:titleTextAppearance="@style/ActionBarTitle"
-            android:layout_height="?actionBarSize"/>
-
+            android:text="@string/app_name"
+            android:layout_height="wrap_content"/>
     <android.support.v7.widget.AppCompatButton
             android:id="@+id/showP"
             android:layout_width="wrap_content"

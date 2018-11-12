@@ -103,7 +103,9 @@ public class ImageChooseActivity extends AppActivity {
         if (TextUtils.isEmpty(mBucketName)) {
             mBucketName = "请选择";
         }
-        initTitle(true, mBucketName, "确定");
+        initTitle(mBucketName);
+        getToolbar().setRightMenu("确定");
+        getToolbar().setRightMenuOnClick(this);
         availableSize = getIntent().getIntExtra(IntentConstants.EXTRA_CAN_ADD_IMAGE_SIZE, CustomConstants.MAX_IMAGE_SIZE);
         initView();
     }

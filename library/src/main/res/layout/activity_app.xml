@@ -1,55 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <android.support.v7.widget.LinearLayoutCompat
-        android:id="@+id/actionRoot"
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:id="@+id/statusBar"
+    <android.support.v7.widget.LinearLayoutCompat
+            android:id="@+id/actionRoot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical">
+
+        <FrameLayout
+                android:id="@+id/statusBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                app:layout_constraintTop_toTopOf="parent"/>
 
         <ViewStub
-            android:id="@+id/base_header"
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:layout="@layout/base_header" />
+                android:id="@+id/baseHeader"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:layout="@layout/base_header"/>
     </android.support.v7.widget.LinearLayoutCompat>
 
     <FrameLayout
-        android:id="@+id/baseRoot"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actionRoot" />
+            android:id="@+id/baseRoot"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/actionRoot"/>
 
     <ViewStub
-        android:id="@+id/viewStubSeat"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout="@layout/seat_layout"
-        app:layout_constraintBottom_toBottomOf="@+id/baseRoot"
-        app:layout_constraintLeft_toLeftOf="@+id/baseRoot"
-        app:layout_constraintRight_toRightOf="@+id/baseRoot"
-        app:layout_constraintTop_toTopOf="@+id/baseRoot" />
+            android:id="@+id/viewStubSeat"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout="@layout/seat_layout"
+            app:layout_constraintBottom_toBottomOf="@+id/baseRoot"
+            app:layout_constraintLeft_toLeftOf="@+id/baseRoot"
+            app:layout_constraintRight_toRightOf="@+id/baseRoot"
+            app:layout_constraintTop_toTopOf="@+id/baseRoot"/>
 
     <ViewStub
-        android:id="@+id/viewStubLoading"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout="@layout/jloading"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/viewStubLoading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/jloading"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

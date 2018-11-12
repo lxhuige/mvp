@@ -15,4 +15,11 @@
         <attr name="headerBgColor" format="color" />
         <attr name="headerTextColor" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="LToolbar">
+        <attr name="rightMenuTextColor" format="color"/>
+        <attr name="rightMenuTextSize" format="dimension"/>
+        <attr name="rightMenuIcon" format="reference"/>
+        <attr name="rightMenuText" format="reference|string"/>
+    </declare-styleable>
 </resources>

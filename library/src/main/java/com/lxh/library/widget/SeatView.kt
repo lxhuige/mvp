@@ -38,8 +38,8 @@ class SeatView {
     fun setSeatIcon(@DrawableRes iconRes: Int) {
         ivSeatIcon?.let {
             Glide.with(it)
-                    .load(iconRes)
-                    .into(it)
+                .load(iconRes)
+                .into(it)
         }
     }
 

@@ -1,6 +1,5 @@
 package com.lxh.mvp
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.lxh.mvp.base.BaseActivity
 import com.lxh.mvp.base.PresenterBase
@@ -8,9 +7,9 @@ import kotlinx.android.synthetic.main.activity_web.*
 
 class WebActivity : BaseActivity<PresenterBase>() {
     override fun initCreate(savedInstanceState: Bundle?) {
+        initTitle("百度")
         showLoading()
         webView.init()
-
         webView.setPosListener { pos ->
             if (pos >= 100) {
                 loadingDismiss()
