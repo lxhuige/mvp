@@ -62,8 +62,8 @@ abstract class AppActivity : AppCompatActivity(), View.OnClickListener, BaseView
     }
 
     fun initTitle(title: String?) {
-        supportActionBar?.title = title
         toolbar.setNavigationOnClickListener { finish() }
+        supportActionBar?.title = title
     }
 
     fun redirectTo(cls: Class<*>, close: Boolean) {

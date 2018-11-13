@@ -39,7 +39,7 @@ public class ImageGridAdapter extends BaseAdapter {
         final ViewHolder mHolder;
 
         if (convertView == null) {
-            convertView = View.inflate(mContext, R.layout.item_image_list, null);
+            convertView = View.inflate(mContext, R.layout.item_image_list,null);
             mHolder = new ViewHolder();
             mHolder.imageIv = convertView.findViewById(R.id.image);
             mHolder.selectedIv = convertView.findViewById(R.id.selected_tag);

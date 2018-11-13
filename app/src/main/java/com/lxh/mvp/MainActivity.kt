@@ -2,6 +2,8 @@ package com.lxh.mvp
 
 import android.content.Intent
 import android.os.Bundle
+import com.lxh.library.modular.imageChoose.ImageBucketChooseActivity
+import com.lxh.library.modular.imageChoose.ImageChooseActivity
 import com.lxh.library.uitils.ToastUtils
 import com.lxh.mvp.base.BaseActivity
 import com.lxh.mvp.base.PresenterBase
@@ -24,7 +26,7 @@ class MainActivity : BaseActivity<PresenterBase>() {
     override fun initListener() {
         showP.setOnClickListener {
             showLoading()
-            startActivity(Intent(this, WebActivity::class.java))
+            startActivity(Intent(this, RecyclerActivity::class.java))
         }
     }
 
