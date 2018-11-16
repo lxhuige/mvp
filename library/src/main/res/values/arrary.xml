@@ -2,18 +2,18 @@
 <resources>
 
     <declare-styleable name="ExpandTextView">
-        <attr name="showLines" format="integer" />
-        <attr name="text_color" format="color" />
+        <attr name="showLines" format="integer"/>
+        <attr name="text_color" format="color"/>
     </declare-styleable>
 
     <declare-styleable name="PraiseListView">
-        <attr name="item_color" format="color" />
-        <attr name="item_selector_color" format="color" />
+        <attr name="item_color" format="color"/>
+        <attr name="item_selector_color" format="color"/>
     </declare-styleable>
 
     <declare-styleable name="MaterialRefreshLayout">
-        <attr name="headerBgColor" format="color" />
-        <attr name="headerTextColor" format="color" />
+        <attr name="headerBgColor" format="color"/>
+        <attr name="headerTextColor" format="color"/>
     </declare-styleable>
 
     <declare-styleable name="LToolbar">
@@ -21,5 +21,14 @@
         <attr name="rightMenuTextSize" format="dimension"/>
         <attr name="rightMenuIcon" format="reference"/>
         <attr name="rightMenuText" format="reference|string"/>
+    </declare-styleable>
+
+    <declare-styleable name="SemiCircleLine">
+        <attr name="lineColor" format="color"/>
+        <attr name="circleColor" format="color"/>
+        <attr name="isShowLine" format="boolean"/>
+        <attr name="isShowCircle" format="boolean"/>
+        <attr name="solidLineWidth" format="dimension"/>
+        <attr name="dottedLineWidth" format="dimension"/>
     </declare-styleable>
 </resources>
