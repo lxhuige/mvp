@@ -47,7 +47,11 @@ public class DownloadManger {
                             @Override
                             public void run() {
                                 isc = false;
-                                if (null != callBack) callBack.success(file);
+                                if (null != callBack) {
+                                    callBack.doingLoad(fileTotal, current);
+                                    callBack.success(file);
+                                }
+                                handler.removeCallbacks(this);
                             }
                         });
                     }
@@ -73,10 +77,11 @@ public class DownloadManger {
         downloadManger.handler.post(new Runnable() {
             @Override
             public void run() {
-                if (null != callBack)
+                if (null != callBack&&downloadManger.isc){
                     callBack.doingLoad(downloadManger.fileTotal, downloadManger.current);
-                if (downloadManger.isc)
-                    downloadManger.handler.postDelayed(this, 1000);
+                    downloadManger.handler.postDelayed(this, 500);
+                }
+
             }
         });
     }
@@ -88,5 +93,6 @@ public class DownloadManger {
 
         void doingLoad(long fileTotal, long current);
     }
+
 
 }

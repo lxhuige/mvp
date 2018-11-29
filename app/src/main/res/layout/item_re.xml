@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.v7.widget.AppCompatTextView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
+        android:id="@+id/rrr"
         android:background="#ffffff"
         android:layout_height="@dimen/base100dp">
 
-</android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.AppCompatTextView>

@@ -10,12 +10,10 @@ object AppManager {
     }
 
     /**
-     * Add activity to vector.
+     * Add activity to Stack.
      */
     fun addActivity(activity: Activity) {
-        if (!contains(activity)) {
-            activityStack.addElement(activity)
-        }
+        activityStack.addElement(activity)
     }
 
     private fun contains(act: Activity): Boolean {
@@ -24,25 +22,23 @@ object AppManager {
 
     /**
      * Get current activity (the last one pushed into vector).
+     * 在服务中调用时请先判空
      */
-    fun currentActivity(): Activity? {
-        return if (activityStack.size > 0) {
-            activityStack.lastElement()
-        } else {
-            null
-        }
+    fun currentActivity(): Activity {
+        return activityStack.lastElement()
+    }
+
+    /**
+     *Tests if this vector has no components.
+     */
+    fun isEmpty(): Boolean {
+        return activityStack.isEmpty()
     }
 
     fun removeActivity(activity: Activity) {
         activityStack.removeElement(activity)
     }
 
-    private fun finishActivity(activity: Activity?) {
-        if (null != activity && !activity.isFinishing) {
-            activity.finish()
-            removeActivity(activity)
-        }
-    }
 
     /**
      * Finish all the activities.
@@ -50,7 +46,7 @@ object AppManager {
     fun finishAllActivity() {
         if (activityStack.size > 0) {
             var activity: Activity?
-            val list = ArrayList(activityStack)
+            val list = activityStack
             val size = list.size
             for (i in size - 1 downTo 0) {
                 activity = list[i]
@@ -97,7 +93,6 @@ object AppManager {
                 }
             }
         }
-
         return preActivity
     }
 
