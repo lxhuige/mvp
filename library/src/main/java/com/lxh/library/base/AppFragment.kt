@@ -1,6 +1,5 @@
 package com.lxh.library.base
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -11,17 +10,20 @@ import com.lxh.library.R
 import com.lxh.library.widget.SeatView
 import kotlinx.android.synthetic.main.base_fragment.view.*
 
-abstract class AppFragment : Fragment() {
+
+abstract class AppFragment<presenterLayer : Presenter> : Fragment() {
     abstract fun initCreate(view: View, savedInstanceState: Bundle?)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initCreate(view, savedInstanceState)
         initListener()
     }
-
+    val presenter: presenterLayer? by lazy {
+        return@lazy createPresenter()
+    }
+    abstract fun createPresenter(): presenterLayer?
     open fun contentView(): Int {
         return 0
     }
-
     protected val seatView by lazy {
         val seat = SeatView()
         if (seat.root == null) {
@@ -48,7 +50,7 @@ abstract class AppFragment : Fragment() {
 
     fun showLoading() {
         activity?.let { activity ->
-            if (activity is AppActivity) {
+            if (activity is AppActivity<*>) {
                 activity.showLoading()
             }
         }
@@ -56,7 +58,7 @@ abstract class AppFragment : Fragment() {
 
     open fun loadingDismiss() {
         activity?.let { activity ->
-            if (activity is AppActivity) {
+            if (activity is AppActivity<*>) {
                 activity.loadingDismiss()
             }
         }
@@ -64,9 +66,22 @@ abstract class AppFragment : Fragment() {
 
     fun redirectTo(cls: Class<*>, close: Boolean) {
         activity?.let { activity ->
-            if (activity is AppActivity) {
+            if (activity is AppActivity<*>) {
                 activity.redirectTo(cls, close)
             }
         }
+    }
+
+    fun getStatusBarHeight(): Int {
+        val activity = activity
+        if (activity is AppActivity<*>) {
+            return activity.getStatusBarHeight()
+        }
+        return resources.getDimensionPixelOffset(R.dimen.base15dp)
+    }
+
+    override fun onDestroy() {
+        presenter?.destroy()
+        super.onDestroy()
     }
 }

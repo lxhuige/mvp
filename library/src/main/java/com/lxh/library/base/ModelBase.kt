@@ -3,6 +3,7 @@ package com.lxh.library.base
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.lxh.library.BuildConfig
 import com.lxh.library.R
 import com.lxh.library.network.Subscribe
 import com.lxh.library.uitils.ToastUtils
@@ -10,7 +11,7 @@ import io.reactivex.Observer
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-abstract class ModelBase(private val presenter: Presenter?):IMode {
+abstract class ModelBase(private val presenter: Presenter?) : IMode {
 
     private val observers by lazy {
         CompositeDisposable()
@@ -48,11 +49,12 @@ abstract class ModelBase(private val presenter: Presenter?):IMode {
             }
 
             override fun onError(e: Throwable) {
+                if (BuildConfig.DEBUG)
+                    ToastUtils.showMessageCenter(e.localizedMessage)
                 onComplete()
                 sub.fail(null, gson)
             }
         }
-
     }
 
 

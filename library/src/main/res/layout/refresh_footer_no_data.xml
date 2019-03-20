@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+                                              android:layout_width="match_parent"
+                                              android:layout_height="wrap_content"
+                                              android:background="@color/main_bg"
+                                              android:gravity="center"
+                                              android:orientation="horizontal">
+
+
+    <View android:layout_width="wrap_content"
+          android:layout_weight="1"
+          android:background="@color/tv_color9"
+          android:layout_height="@dimen/base1dp"/>
+
+    <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/bottomTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/base20dp"
+            android:text="我是有底线的"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/base14sp"/>
+    <View android:layout_width="wrap_content"
+          android:layout_weight="1"
+          android:background="@color/tv_color9"
+          android:layout_height="@dimen/base1dp"/>
+</android.support.v7.widget.LinearLayoutCompat>

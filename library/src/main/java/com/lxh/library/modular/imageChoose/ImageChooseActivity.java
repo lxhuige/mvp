@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.lxh.library.R;
 import com.lxh.library.base.AppActivity;
 
+import com.lxh.library.base.Presenter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -115,5 +116,11 @@ public class ImageChooseActivity extends AppActivity {
         intent.putExtra(IntentConstants.EXTRA_IMAGE_LIST, new ArrayList<>(selectedImgs.values()));
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    @Nullable
+    @Override
+    public Presenter createPresenter() {
+        return null;
     }
 }

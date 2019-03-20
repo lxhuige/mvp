@@ -21,6 +21,8 @@ import android.widget.RelativeLayout;
 
 import com.lxh.library.R;
 
+import java.util.Queue;
+
 
 /**
  * @author lixiaohui on 2017/7/5 0005.
@@ -29,7 +31,7 @@ import com.lxh.library.R;
 public class MaterialRefreshLayout extends FrameLayout {
 
     private final static int HIGHER_WAVE_HEIGHT = 180;
-    private final static int hIGHER_HEAD_HEIGHT = 70;
+    private final static int hIGHER_HEAD_HEIGHT = 60;
 
     private DecelerateInterpolator decelerateInterpolator;
     private View mChildView;
@@ -40,10 +42,6 @@ public class MaterialRefreshLayout extends FrameLayout {
      * 是否需要上拉加载
      */
     private boolean isLoadMore;
-    /**
-     * 是否是否显示底部 默认不显示
-     */
-    private boolean isShowFooterView;
     private boolean isLoadMoreing;
     private float mTouchY;
     private float mCurrentY;
@@ -173,10 +171,6 @@ public class MaterialRefreshLayout extends FrameLayout {
                         dy = Math.abs(dy);
                         dy = Math.min(mWaveHeight * 2, dy);
                         offsetY = decelerateInterpolator.getInterpolation(dy / mWaveHeight / 2) * dy / 2;
-                        if (isShowFooterView && mFooterRootHeight > offsetY) {
-                            offsetY = mFooterRootHeight;
-                            mFooterRoot.setVisibility(GONE);
-                        }
                         mMaterialFooterView.getLayoutParams().height = (int) offsetY;
                         mMaterialFooterView.requestLayout();
                         mMaterialFooterView.Refreshing(offsetY, this);
@@ -243,10 +237,6 @@ public class MaterialRefreshLayout extends FrameLayout {
                     viewPropertyAnimatorCompat.setInterpolator(new DecelerateInterpolator());
                     viewPropertyAnimatorCompat.start();
                     int offsetY = 0;
-                    if (isShowFooterView && null != mFooterRoot) {
-                        offsetY = mFooterRootHeight;
-                        mFooterRoot.setVisibility(VISIBLE);
-                    }
                     mMaterialFooterView.setVisibility(GONE);
                     mMaterialFooterView.getLayoutParams().height = offsetY;
                     mMaterialFooterView.requestLayout();
@@ -353,36 +343,11 @@ public class MaterialRefreshLayout extends FrameLayout {
      */
     public void setLoadMore(boolean loadMore) {
         isLoadMore = loadMore;
-        if (isShowFooterView && null != mFooterRoot) {
-            mMaterialFooterView.setShowDefault(this);
-            mMaterialFooterView.setVisibility(VISIBLE);
-            mFooterRoot.setVisibility(View.VISIBLE);
-            mFooterRootHeight = mFooterRoot.getMeasuredHeight();
-            if (mFooterRootHeight == 0)
-                mFooterRootHeight = mFooterRoot.getHeight();
-            mMaterialFooterView.getLayoutParams().height = (int) getFooterHeight();
-            mMaterialFooterView.requestLayout();
-        }
     }
+
 
     public boolean getLoadMore() {
         return isLoadMore;
-    }
-
-    /**
-     * 调用此方法前，需先调用setLoadMore（）否侧此方法无效
-     *
-     * @param showFooterView true 显示底部 false 隐藏底部
-     */
-    public void setShowFooterView(boolean showFooterView) {
-        isShowFooterView = showFooterView;
-    }
-
-    private RelativeLayout mFooterRoot;
-    private int mFooterRootHeight;
-
-    public void setFooterRoot(RelativeLayout mFooterRoot) {
-        this.mFooterRoot = mFooterRoot;
     }
 
     /**
@@ -397,4 +362,5 @@ public class MaterialRefreshLayout extends FrameLayout {
     public boolean isLoadMoreing() {
         return isLoadMoreing;
     }
+
 }

@@ -3,23 +3,26 @@ package com.lxh.library.base
 import android.content.Context
 import java.lang.ref.SoftReference
 
- abstract class BasePresenter<V : BaseView>(view: V) : Presenter {
+abstract class BasePresenter<M : ModelBase, V : BaseView>(view: V) : Presenter {
     var mView: SoftReference<V>? = null
 
     init {
         mView = SoftReference(view)
     }
-
+    private val mode: M? by lazy { this.createModel() }
+    abstract fun createModel(): M?
     override fun destroy() {
         mView?.clear()
         mView = null
-        getModel<ModelBase>()?.destroy()
+        getModel()?.destroy()
     }
 
     /**
      * 获取model
      */
-    abstract fun <M : ModelBase> getModel(): M?
+    fun getModel(): M? {
+        return mode
+    }
 
     override fun loadingDismiss() {
         mView?.get()?.loadingDismiss()

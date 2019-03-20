@@ -4,17 +4,17 @@ import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import com.lxh.library.base.AppActivity
+import com.lxh.library.base.NullPresenter
 import com.lxh.library.widget.recyclerView.GridDividerItemDecoration
 import com.lxh.library.widget.recyclerView.SuperBaseAdapter
-import com.lxh.mvp.base.BaseActivity
-import com.lxh.mvp.base.PresenterBase
 import kotlinx.android.synthetic.main.activity_recycler.*
 import kotlinx.android.synthetic.main.item_re.view.*
 
-class RecyclerActivity : BaseActivity<PresenterBase>() {
+class RecyclerActivity : AppActivity<NullPresenter>() {
     private val adapter by lazy {
         object : SuperBaseAdapter<String>() {
-            override fun convertView(holder: RecyclerView.ViewHolder, item: String?, position: Int) {
+            override fun convertView(holder: RecyclerView.ViewHolder, item: String, position: Int) {
                 holder.itemView.rrr.text = item
                 holder.itemView.setOnClickListener {
                   addHeaderView(LayoutInflater.from(getContext()).inflate(R.layout.base_header, recyclerView,false))
@@ -34,7 +34,7 @@ class RecyclerActivity : BaseActivity<PresenterBase>() {
         recyclerView.addItemDecoration(GridDividerItemDecoration(getContext(), 30, R.color.cardview_dark_background))
     }
 
-    override fun createPresenter(): PresenterBase? {
+    override fun createPresenter(): NullPresenter? {
         return null
     }
 

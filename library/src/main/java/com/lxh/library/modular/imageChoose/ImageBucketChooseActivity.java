@@ -13,6 +13,7 @@ import android.widget.ListView;
 import com.lxh.library.R;
 import com.lxh.library.base.AppActivity;
 
+import com.lxh.library.base.NullPresenter;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.Serializable;
@@ -91,5 +92,11 @@ public class ImageBucketChooseActivity extends AppActivity {
         mHelper = ImageFetcher.getInstance(getApplicationContext());
         initData();
         initView();
+    }
+
+    @Nullable
+    @Override
+    public NullPresenter createPresenter() {
+        return null;
     }
 }

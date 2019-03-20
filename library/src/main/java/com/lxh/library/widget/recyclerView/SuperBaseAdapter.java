@@ -1,12 +1,16 @@
 package com.lxh.library.widget.recyclerView;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.LinearLayout;
+import com.lxh.library.R;
+import com.lxh.library.uitils.ToastUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -60,9 +64,10 @@ public abstract class SuperBaseAdapter<T> extends RecyclerView.Adapter<RecyclerV
 
     public void setData(List<T> mData) {
         this.mData = mData;
+        notifyDataSetChanged();
     }
 
-    public abstract void convertView(RecyclerView.ViewHolder holder, @Nullable T item, int position);
+    public abstract void convertView( @NonNull RecyclerView.ViewHolder holder, @NonNull T item, int position);
 
     @NonNull
     @Override
@@ -87,7 +92,8 @@ public abstract class SuperBaseAdapter<T> extends RecyclerView.Adapter<RecyclerV
                 break;
             default:
                 position = position - getHeaderViewCount();
-                convertView(holder, getItem(position), position);
+                T item = getItem(position);
+                if (item != null) convertView(holder, item, position);
                 break;
         }
     }
@@ -203,11 +209,32 @@ public abstract class SuperBaseAdapter<T> extends RecyclerView.Adapter<RecyclerV
         mFooterLayout = null;
     }
 
-    public int getHeaderViewCount() {
-        return null == mHeaderLayout ? 0 : 1;
+    private int getHeaderViewCount() {
+        return null == mHeaderLayout ? 0 : mHeaderLayout.getChildCount();
     }
 
-    public int getFooterViewCount() {
-        return null == mFooterLayout ? 0 : 1;
+    private int getFooterViewCount() {
+        return null == mFooterLayout ? 0 : mFooterLayout.getChildCount();
     }
+
+    //没有更多数据时显示的View
+    private View noData;
+
+    public boolean setShowNoDataFooter(boolean isShow, Context context) {
+        if (isShow) {
+            if (noData == null) {
+                noData = LayoutInflater.from(context).inflate(R.layout.refresh_footer_no_data, null);
+                addFooterView(noData, getFooterViewCount());
+            }else {
+                noData.setVisibility(View.VISIBLE);
+            }
+            ToastUtils.INSTANCE.showMessageCenter("没有更多了");
+        } else {
+            if (noData != null) {
+                noData.setVisibility(View.GONE);
+            }
+        }
+        return isShow;
+    }
+
 }

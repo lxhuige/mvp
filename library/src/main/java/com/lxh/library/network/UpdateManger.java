@@ -1,9 +1,6 @@
 package com.lxh.library.network;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.ProgressDialog;
+import android.app.*;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -67,7 +64,7 @@ public class UpdateManger {
     private UpdateManger() {
     }
 
-    public UpdateManger setNotify(@DrawableRes int resgitId, @NonNull Context context) {
+    public UpdateManger setNotify(@DrawableRes int resId, @NonNull Context context) {
         if (null != contextWeakReference) {
             contextWeakReference.clear();
             contextWeakReference = null;
@@ -88,6 +85,10 @@ public class UpdateManger {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             builder.setContentTitle(getAppName(context));
             NotificationChannel notificationChannel = new NotificationChannel(getAppName(context), getAppName(context), NotificationManager.IMPORTANCE_HIGH);
+            notificationChannel.enableLights(false);
+            notificationChannel.enableVibration(false);
+            notificationChannel.setVibrationPattern(new long[]{0});
+            notificationChannel.setSound(null, null);
             manager.createNotificationChannel(notificationChannel);
         }
         manager.notify(NO_3, builder.build());
@@ -130,11 +131,11 @@ public class UpdateManger {
         download(url, file, null);
     }
 
-    public void download(final String url, final File file, final UpdateManger.CallBack callBack) {
+    public void download(final String url, final File file, final CallBack callBack) {
         if (isDowning) return;
         if (this.file != null) {
             if (callBack != null) callBack.success(this.file);
-            if (isShowDialog) showUpdateDialog(this.file);
+            if (isShowDialog) showUpdateDialog(this.file, callBack);
             if (null != manager) manager.cancel(NO_3);
             return;
         }
@@ -147,13 +148,13 @@ public class UpdateManger {
                 getInstance().file = file;
                 isDowning = false;
                 manager.cancel(NO_3);
-                if (null != callBack) {
+                if (null != callBack&&!isShowDialog) {
                     callBack.success(file);
                     clearMemory();
                     return;
                 }
                 if (isShowDialog) {
-                    showUpdateDialog(file);
+                    showUpdateDialog(file, callBack);
                     return;
                 }
                 installByNotify();
@@ -171,8 +172,8 @@ public class UpdateManger {
                 if (null != callBack) callBack.doingLoad(fileTotal, current);
                 if (null != builder && fileTotal != 0L) {
                     manager.notify(NO_3, builder.build());
-                    Integer max = Integer.valueOf(String.valueOf(fileTotal / 1024 / 1024));
-                    Integer value = Integer.valueOf(String.valueOf(current / 1024 / 1024));
+                    int max = Integer.parseInt(String.valueOf(fileTotal / 1024 / 1024));
+                    int value = Integer.valueOf(String.valueOf(current / 1024 / 1024));
                     builder.setProgress(max, value, false);
                     //下载进度提示
                     float v = (current * 100f / fileTotal);
@@ -187,10 +188,13 @@ public class UpdateManger {
         });
     }
 
-    private void showUpdateDialog(final File file) {
+    private void showUpdateDialog(final File file, final CallBack callBack) {
         if (contextWeakReference == null) return;
         final Context context = contextWeakReference.get();
         if (null == context) return;
+        if (context instanceof Activity) {
+            if (((Activity) context).isFinishing()) return;
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setTitle("温馨提示")
                 .setMessage(message)
@@ -204,6 +208,8 @@ public class UpdateManger {
                 .setPositiveButton("安装", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        if (null != callBack)
+                            callBack.onClickInstall();
                         installApp(file, context);
                     }
                 });
@@ -289,6 +295,9 @@ public class UpdateManger {
         }
 
         public void doingLoad(long fileTotal, long current) {
+        }
+
+        public void onClickInstall() {
         }
     }
 }

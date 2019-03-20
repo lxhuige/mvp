@@ -22,7 +22,7 @@ object ToastUtils {
      * @param strId the resource ID of the content.
      */
     fun showMessageCenter(@StringRes strId: Int) {
-        val msg = AppManager.currentActivity()?.resources?.getString(strId)
+        val msg = AppManager.currentActivity().resources?.getString(strId)
         showMessageCenter(msg)
     }
 

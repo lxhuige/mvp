@@ -1,6 +1,7 @@
 package com.lxh.library.widget.recyclerView;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -66,7 +67,6 @@ public class RecycleViewDivider extends RecyclerView.ItemDecoration {
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
         super.onDraw(c, parent, state);
-
         if (mOrientation == LinearLayoutManager.VERTICAL) {
             drawHorizontal(c, parent);
         } else {

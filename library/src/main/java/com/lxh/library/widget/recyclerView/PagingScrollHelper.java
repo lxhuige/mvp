@@ -25,8 +25,8 @@ public class PagingScrollHelper {
     private int offsetY = 0;
     private int offsetX = 0;
 
-    int startY = 0;
-    int startX = 0;
+    private int startY = 0;
+    private int startX = 0;
 
 
     enum ORIENTATION {

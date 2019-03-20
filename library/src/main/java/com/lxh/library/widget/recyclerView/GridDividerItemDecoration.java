@@ -100,8 +100,9 @@ public class GridDividerItemDecoration extends RecyclerView.ItemDecoration {
     // 绘制垂直线
     private void drawVertical(Canvas c, @NonNull RecyclerView parent) {
         final int childCount = parent.getChildCount();
-        int j = childCount % getSpanCount(parent) == 0 ? 0 : 1;
-        for (int i = 0; i < childCount - j; i++) {
+//        int j = childCount % getSpanCount(parent) == 0 ? 0 : 1;
+//        for (int i = 0; i < childCount - j; i++) {
+        for (int i = 0; i < childCount; i++) {
             final View child = parent.getChildAt(i);
             final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
             int top = child.getTop() - params.topMargin;

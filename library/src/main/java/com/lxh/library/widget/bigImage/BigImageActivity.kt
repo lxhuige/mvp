@@ -15,10 +15,15 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.lxh.library.R
 import com.lxh.library.base.AppActivity
+import com.lxh.library.base.NullPresenter
 import kotlinx.android.synthetic.main.activity_big_image_activity.*
 import java.io.File
 
-class BigImageActivity : AppActivity() {
+class BigImageActivity : AppActivity<NullPresenter>() {
+    override fun createPresenter(): NullPresenter? {
+        return null
+    }
+
     override val contentView = R.layout.activity_big_image_activity
 
     companion object {

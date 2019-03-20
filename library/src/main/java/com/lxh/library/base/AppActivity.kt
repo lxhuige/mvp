@@ -3,15 +3,12 @@ package com.lxh.library.base
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.support.annotation.DrawableRes
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.AppCompatImageView
-import android.support.v7.widget.AppCompatTextView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
@@ -21,15 +18,16 @@ import com.lxh.library.R
 import com.lxh.library.widget.LToolbar
 import com.lxh.library.widget.SeatView
 import kotlinx.android.synthetic.main.activity_app.*
-import kotlinx.android.synthetic.main.base_header.*
 
-abstract class AppActivity : AppCompatActivity(), View.OnClickListener, BaseView {
+/**
+ * 如果需要监听生命周期 在application中使用 ActivityLifecycleCallbacks
+ */
+abstract class AppActivity<presenterLayer : Presenter> : AppCompatActivity(), View.OnClickListener, BaseView {
     private val loading by lazy {
         val view = viewStubLoading.inflate()
         view.setOnClickListener { loadingDismiss() }
         return@lazy view
     }
-
     protected val seatView by lazy {
         val seat = SeatView()
         val view = viewStubSeat.inflate()
@@ -44,18 +42,21 @@ abstract class AppActivity : AppCompatActivity(), View.OnClickListener, BaseView
         setSupportActionBar(lToolbar)
         return@lazy lToolbar
     }
+    val presenter: presenterLayer? by lazy {
+        return@lazy createPresenter()
+    }
 
+    abstract fun createPresenter(): presenterLayer?
     abstract val contentView: Int
     abstract fun initCreate(savedInstanceState: Bundle?)
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AppManager.addActivity(this)
         setContentView(R.layout.activity_app)
         LayoutInflater.from(this).inflate(contentView, baseRoot, true)
+        AppManager.addActivity(this)
         initCreate(savedInstanceState)
         initListener()
     }
-
 
     fun initTitle(resId: Int) {
         initTitle(getString(resId))
@@ -81,7 +82,7 @@ abstract class AppActivity : AppCompatActivity(), View.OnClickListener, BaseView
     /**
      * 获取状态栏高度——方法
      */
-    private fun getStatusBarHeight(): Int {
+    fun getStatusBarHeight(): Int {
         var statusBarHeight1 = -1
         //获取status_bar_height资源的ID
         val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
@@ -128,13 +129,15 @@ abstract class AppActivity : AppCompatActivity(), View.OnClickListener, BaseView
     }
 
     override fun onDestroy() {
-        super.onDestroy()
+        presenter?.destroy()
         AppManager.removeActivity(this)
+        super.onDestroy()
+
     }
 
     override fun finish() {
-        super.finish()
         AppManager.removeActivity(this)
+        super.finish()
     }
 
     override fun getContext(): AppCompatActivity {
@@ -163,7 +166,6 @@ abstract class AppActivity : AppCompatActivity(), View.OnClickListener, BaseView
     }
 
     override fun onClick(v: View) {
-
     }
 
     open fun initListener() {}

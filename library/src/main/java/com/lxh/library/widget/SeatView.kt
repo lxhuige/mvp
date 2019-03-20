@@ -19,20 +19,24 @@ class SeatView {
     private var isShowIng = false
     private var isDismissIng = false
 
-    fun setHintText(hint: String) {
+    fun setHintText(hint: String): SeatView {
         tvSeatHint?.text = hint
+        return this
     }
 
-    fun setSeatBtnText(text: String) {
+    fun setSeatBtnText(text: String): SeatView {
         tvSeatBtn?.visibility = View.VISIBLE
         tvSeatBtn?.text = text
+        return this
     }
-    fun setSeatOnClickListener(listener : View.OnClickListener) {
+
+    fun setSeatOnClickListener(listener: View.OnClickListener) {
         tvSeatBtn?.setOnClickListener(listener)
     }
 
-    fun setSeatBtnBackGround(@DrawableRes res:Int){
+    fun setSeatBtnBackGround(@DrawableRes res: Int): SeatView {
         tvSeatBtn?.setBackgroundResource(res)
+        return this
     }
 
     fun setSeatIcon(@DrawableRes iconRes: Int) {
@@ -44,6 +48,9 @@ class SeatView {
     }
 
     fun show() {
+        animatorSet?.let {
+            if (it.isRunning) it.cancel()
+        }
         if (isShowIng || isDismissIng) return
         root?.let {
             it.visibility = View.VISIBLE
@@ -71,31 +78,36 @@ class SeatView {
         }
     }
 
+    var animatorSet: AnimatorSet? = null
+
     fun dismiss() {
         if (isShowIng || isDismissIng) return
         root?.let {
             val ofFloatX = ObjectAnimator.ofFloat(it, "scaleX", 1f, 0.1f)
             val ofFloatY = ObjectAnimator.ofFloat(it, "scaleY", 1f, 0.1f)
-            val animatorSet = AnimatorSet()
-            animatorSet.playTogether(ofFloatX, ofFloatY)
-            animatorSet.duration = 1000
-            animatorSet.addListener(object : Animator.AnimatorListener {
-                override fun onAnimationRepeat(animation: Animator?) {
-                }
+            animatorSet = AnimatorSet()
+            return@let animatorSet?.let { animatorSet ->
+                animatorSet.playTogether(ofFloatX, ofFloatY)
+                animatorSet.duration = 1000
+                animatorSet.addListener(object : Animator.AnimatorListener {
+                    override fun onAnimationRepeat(animation: Animator?) {
+                    }
 
-                override fun onAnimationEnd(animation: Animator?) {
-                    isDismissIng = false
-                    it.visibility = View.GONE
-                }
+                    override fun onAnimationEnd(animation: Animator?) {
+                        isDismissIng = false
+                        it.visibility = View.GONE
+                    }
 
-                override fun onAnimationCancel(animation: Animator?) {
-                }
+                    override fun onAnimationCancel(animation: Animator?) {
+                    }
 
-                override fun onAnimationStart(animation: Animator?) {
-                    isDismissIng = true
-                }
-            })
-            animatorSet.start()
+                    override fun onAnimationStart(animation: Animator?) {
+                        isDismissIng = true
+                    }
+                })
+                animatorSet.start()
+            }
+
         }
     }
 }

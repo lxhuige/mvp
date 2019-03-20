@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.support.v4.app.ActivityCompat
+import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
 import java.io.File
@@ -24,9 +25,24 @@ object PermissionUtil {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return false
         var isApplyPermission = false
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-         || ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE), permissionCode)
+            || ContextCompat.checkSelfPermission(
+                activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+            || ContextCompat.checkSelfPermission(
+                activity,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                activity,
+                arrayOf(
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ),
+                permissionCode
+            )
             isApplyPermission = true
         }
         return isApplyPermission
@@ -40,7 +56,7 @@ object PermissionUtil {
      *
      */
     fun checkPermission(activity: Activity, permissionCode: Int, vararg permission: String): Boolean {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return false
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return true
         var isApplyPermission = false
         permission.forEach { item ->
             if (ContextCompat.checkSelfPermission(activity, item) != PackageManager.PERMISSION_GRANTED) {
@@ -49,7 +65,27 @@ object PermissionUtil {
         }
         if (isApplyPermission)
             ActivityCompat.requestPermissions(activity, permission, permissionCode)
-        return isApplyPermission
+        return !isApplyPermission
+    }
+
+    /**
+     * @param fragment 当前Fragment
+     * @param permissionCode  申请权限code
+     * @param permission 要检查的权限
+     * @return true 为获取权限 false 已经获取到权限
+     *
+     */
+    fun checkPermission(fragment: Fragment, permissionCode: Int, vararg permission: String): Boolean {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return true
+        var isApplyPermission = false
+        permission.forEach { item ->
+            if (ContextCompat.checkSelfPermission(fragment.activity!!, item) != PackageManager.PERMISSION_GRANTED) {
+                isApplyPermission = true
+            }
+        }
+        if (isApplyPermission)
+            fragment.requestPermissions(permission, permissionCode)
+        return !isApplyPermission
     }
 
     /**

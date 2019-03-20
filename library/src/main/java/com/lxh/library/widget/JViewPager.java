@@ -35,7 +35,7 @@ public class JViewPager extends ViewPager {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
         if (!isCanScroll) {
-            if (event.getY() <topScr) {
+            if (topScr==0||event.getY() <topScr) {
                 return false;
             }
         }
@@ -45,7 +45,7 @@ public class JViewPager extends ViewPager {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (!isCanScroll) {
-            if (event.getY() < topScr) {
+            if (topScr==0||event.getY() < topScr) {
                 return false;
             }
         }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.*;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import com.lxh.library.R;
@@ -81,6 +82,9 @@ private  DashPathEffect dashPathEffect;
 
     //线跟 半圆都显示
     private void CircleAndLine(@NonNull Canvas canvas) {
+        mPaint.setAntiAlias(true);
+        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setColor(circleColor);
         canvas.drawCircle(0, height / 2, height / 2, mPaint);
         canvas.drawCircle(width, height / 2, height / 2, mPaint);
         canvas.save();

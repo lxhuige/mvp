@@ -120,6 +120,6 @@ public class BitmapCache extends AppCompatActivity {
 
 	public interface ImageCallback {
 		 void imageLoad(ImageView imageView, Bitmap bitmap,
-                              Object... params);
+                        Object... params);
 	}
 }

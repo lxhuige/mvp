@@ -113,8 +113,7 @@ object SystemUtil {
         animator.addUpdateListener { animation ->
             val value = animation.animatedValue
             if (value is Float) {
-                if (activity != null)
-                    SystemUtil.backgroundAlpha(value + 0.5f, activity)
+                SystemUtil.backgroundAlpha(value + 0.5f, activity)
             }
         }
         animator.start()

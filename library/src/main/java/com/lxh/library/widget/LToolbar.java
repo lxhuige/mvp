@@ -116,7 +116,7 @@ public class LToolbar extends Toolbar {
      *
      * @param listener 回调接口
      */
-    public LToolbar setRightMenuOnClick(View.OnClickListener listener) {
+    public LToolbar setRightMenuOnClick(OnClickListener listener) {
         if (rightMenuTextView == null) throw new RuntimeException("哥们儿，还没设置menu呢");
         rightMenuTextView.setOnClickListener(listener);
         return this;
@@ -127,7 +127,7 @@ public class LToolbar extends Toolbar {
             rightMenuTextView = new AppCompatTextView(getContext());
             rightMenuTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, rightMenuTextSize);
             rightMenuTextView.setTextColor(rightMenuTextColor);
-            Toolbar.LayoutParams lp = this.generateDefaultLayoutParams();
+            LayoutParams lp = this.generateDefaultLayoutParams();
             lp.gravity = Gravity.CENTER_VERTICAL | Gravity.RIGHT;
             lp.height = LayoutParams.MATCH_PARENT;
             lp.width = LayoutParams.WRAP_CONTENT;

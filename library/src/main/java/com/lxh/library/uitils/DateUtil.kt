@@ -158,7 +158,7 @@ object DateUtil {
      */
     fun getChatTimeStr(timeStamp: Long): String {
         if (timeStamp == 0L) return ""
-        val activity = AppManager.currentActivity()!!
+        val activity = AppManager.currentActivity()
         val inputTime = Calendar.getInstance()
         inputTime.timeInMillis = timeStamp * 1000
         val currenTimeZone = inputTime.time

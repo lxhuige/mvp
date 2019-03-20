@@ -1,11 +1,11 @@
 package com.lxh.mvp
 
 import android.os.Bundle
-import com.lxh.mvp.base.BaseActivity
-import com.lxh.mvp.base.PresenterBase
+import com.lxh.library.base.AppActivity
+import com.lxh.library.base.NullPresenter
 import kotlinx.android.synthetic.main.activity_web.*
 
-class WebActivity : BaseActivity<PresenterBase>() {
+class WebActivity : AppActivity<NullPresenter>() {
     override fun initCreate(savedInstanceState: Bundle?) {
         initTitle("百度")
         showLoading()
@@ -18,7 +18,7 @@ class WebActivity : BaseActivity<PresenterBase>() {
         webView.loadUrl("http://www.baidu.com")
     }
 
-    override fun createPresenter(): PresenterBase? {
+    override fun createPresenter(): NullPresenter? {
         return null
     }
 
