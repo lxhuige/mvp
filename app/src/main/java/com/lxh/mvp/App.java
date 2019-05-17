@@ -10,7 +10,4 @@ public class App extends Application {
         super.onCreate();
         CrashHandler.getInstance().init(getApplicationContext());
     }
-
-    public static void dd(){
-    }
 }
